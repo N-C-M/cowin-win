@@ -1,0 +1,25 @@
+{
+  "name": "cowin-win",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/N-C-M/cowin-win.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/N-C-M/cowin-win/issues"
+  },
+  "homepage": "https://github.com/N-C-M/cowin-win#readme",
+  "dependencies": {
+    "discord.js": "^12.5.3"
+  },
+  "devDependencies": {
+    "eslint": "^7.26.0"
+  }
+}
