@@ -49,12 +49,12 @@ client.on('message', message=> {
         message.channel.send(avatarlist);
     }
     else if(command ==='joke') {
-        let getJoke = async()=> {
+        let getJoke = async () => {
             let result = await fetch('https://official-joke-api.appspot.com/random_joke');
             let  json= await result.json();
             return json;
         }
-        let jokeValue = await getJoke();
+        let jokeValue =  getJoke();
 
         console.log(jokeValue);
         message.channel.send('hi');
