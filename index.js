@@ -60,7 +60,7 @@ client.on('message', async message=> {
         let jokeValue =  await getJoke();
 
         console.log(jokeValue);
-        message.channel.send('hi');
+        message.reply(`${jokeValue.setup}\n\n${jokeValue.punchline}`);
 
     }
 });
