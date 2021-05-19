@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 // const config = require('./config.json');
+const fetch = require('node-fetch');
 const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
 
@@ -7,11 +8,10 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('message', message => {
+client.on('message', message=> {
 	// console.log(message.content);
     if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
+     const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
 
     if (message.content.startsWith(`${prefix}ping`)) {
@@ -25,7 +25,7 @@ client.on('message', message => {
         message.channel.send(`Your Username: ${message.author.username}\nYour User ID: ${message.author.id}`)
     } else if ( command == 'args-info'){
         if (!args.length){
-            return message.channel.send(`You didn't provide any aruements!!, ${message.author}`);
+            return message.channel.send(`You didn't provide any arguments!!, ${message.author}`);
         } else if (args[0] == 'foo'){
             return message.channel.send("Bar")
         } 
@@ -48,7 +48,18 @@ client.on('message', message => {
         });
         message.channel.send(avatarlist);
     }
+    else if(command ==='joke') {
+        let getJoke = async()=> {
+            let result = await fetch('https://official-joke-api.appspot.com/random_joke');
+            let  json= await result.json();
+            return json;
+        }
+        let jokeValue = await getJoke();
 
+        console.log(jokeValue);
+        message.channel.send('hi');
+
+    }
 });
 
 client.login(token);
