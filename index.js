@@ -64,11 +64,12 @@ client.on('message', async message=> {
           }
           const url = "https://cdn-api.co-vin.in/api/v2/admin/location/states"
         //   axios.post(url, config).then(...)
+        const state_id = args[0];
                 
-            let result = await axios.get('https://cdn-api.co-vin.in/api/v2/admin/location/states', config);
+            let result = await axios.get(`https://cdn-api.co-vin.in/api/v2/admin/location/districts/${state_id}`, config);
             // let  json= await result.json();
-            console.log(result.data.states);
-            message.reply(JSON.stringify(result.data.states))
+            console.log(result.data.districts);
+            message.reply(JSON.stringify(result.data.districts))
             // return json;
         }
         // let res = await result;
