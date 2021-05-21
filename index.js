@@ -1,8 +1,11 @@
 const Discord = require('discord.js');
 // const config = require('./config.json');
 const fetch = require('node-fetch');
+const axios = require('axios');
 const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
+
+const sampleUserAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36'
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -49,20 +52,40 @@ client.on('message', async message=> {
         message.channel.send(avatarlist);
     }
     else if(command ==='joke') {
-        let getJoke = async () => {
-            let result = await fetch('https://official-joke-api.appspot.com/random_joke');
-            let  json= await result.json();
-            return json;
+        // let getJoke = async () => {
+        //     // let result = await fetch('https://official-joke-api.appspot.com/random_joke');
+
+        let config = {
+            headers: {
+                accept: "application/json",
+                "User-Agent":
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0",
+            }
+          }
+          const url = "https://cdn-api.co-vin.in/api/v2/admin/location/states"
+        //   axios.post(url, config).then(...)
+                
+            let result = await axios.get('https://cdn-api.co-vin.in/api/v2/admin/location/states', config);
+            // let  json= await result.json();
+            console.log(result.data.states);
+            message.reply(JSON.stringify(result.data.states))
+            // return json;
         }
-        // fetch('https://official-joke-api.appspot.com/random_joke').then(function(response) {
-        //     console.log(response.json());
+        // let res = await result;
+        // // fetch('https://official-joke-api.appspot.com/random_joke').then(function(response) {
+        // //     console.log(response.json());
+        // // });
+        // let jokeValue =  await getJoke();
+        // const url = "https://cdn-api.co-vin.in/api/v2/admin/location/states"
+        // axios.get(url, { headers: { 'User-Agent': sampleUserAgent } }).then((result) => {
+        //     let  json = result.json();
+        //     console.log(json)
         // });
-        let jokeValue =  await getJoke();
 
-        console.log(jokeValue);
-        message.reply(`${jokeValue.setup}\n\n${jokeValue.punchline}`);
+        // console.log(jokeValue);
+        // message.reply(`${jokeValue.setup}\n\n${jokeValue.punchline}`);
 
-    }
+    
 });
 
 
